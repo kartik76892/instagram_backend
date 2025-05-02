@@ -4,12 +4,11 @@ import instaloader
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://instagram-frontend-topaz.vercel.app"])
 
 @app.route('/api/followers', methods=['POST'])
 def get_followers():
     data = request.get_json()
-    print("This is test", data)
     username = data.get('username')
 
     L = instaloader.Instaloader()

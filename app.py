@@ -4,7 +4,8 @@ import os
 import requests
 
 app = Flask(__name__)
-CORS(app, origins=["https://instagram-frontend-topaz.vercel.app"])
+CORS(app, resources={r"/*": {"origins": "*"}})
+
 
 @app.route('/api/followers', methods=['POST'])
 def get_followers():

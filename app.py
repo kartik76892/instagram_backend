@@ -15,6 +15,7 @@ def get_followers():
 
     try:
         profile = instaloader.Profile.from_username(L.context, username)
+        print(profile.followers)
         return jsonify({'followers': profile.followers})
     except Exception:
         return jsonify({'followers': 0})

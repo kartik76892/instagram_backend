@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import instaloader
 import os
+   import requests
 
 app = Flask(__name__)
 CORS(app, origins=["https://instagram-frontend-topaz.vercel.app"])
@@ -11,14 +12,20 @@ def get_followers():
     data = request.get_json()
     username = data.get('username')
 
-    L = instaloader.Instaloader()
 
-    try:
-        profile = instaloader.Profile.from_username(L.context, username)
-        print(profile.followers)
-        return jsonify({'followers': profile.followers})
-    except Exception:
-        return jsonify({'followers': 0})
+url = "https://instagram230.p.rapidapi.com/user/details"
+
+querystring = {"username":username}
+
+headers = {
+	"x-rapidapi-key": "3357c42dcbmshd92e678d4f5e136p1eae7fjsnc9b368c274c8",
+	"x-rapidapi-host": "instagram230.p.rapidapi.com"
+}
+
+response = requests.get(url, headers=headers, params=querystring)
+
+print(response.json())
+return jsonify({'followers': response.edge_followed_by.count})
 
 @app.route('/')
 def home():

@@ -22,8 +22,8 @@ def get_followers():
     try:
         response = requests.get(url, headers=headers, params=querystring)
         data = response.json()
-        followers = data.get('edge_followed_by', {}).get('count', 0)
-        return jsonify({'followers': followers})
+        #followers = data.get('edge_followed_by', {}).get('count', 0)
+        return jsonify({'followers': data.edge_followed_by.count})
     except Exception as e:
         print("Error:", e)
         return jsonify({'followers': 0})

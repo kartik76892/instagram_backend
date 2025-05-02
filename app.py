@@ -14,10 +14,15 @@ def get_followers():
     url = "https://instagram230.p.rapidapi.com/user/details"
     querystring = {"username": username}
 
+    # headers = {
+    #     "x-rapidapi-key": "3357c42dcbmshd92e678d4f5e136p1eae7fjsnc9b368c274c8",
+    #     "x-rapidapi-host": "instagram230.p.rapidapi.com"
+    # }
     headers = {
-        "x-rapidapi-key": "3357c42dcbmshd92e678d4f5e136p1eae7fjsnc9b368c274c8",
-        "x-rapidapi-host": "instagram230.p.rapidapi.com"
-    }
+    "x-rapidapi-key": os.environ.get("RAPIDAPI_KEY"),
+    "x-rapidapi-host": "instagram230.p.rapidapi.com"
+}
+
 
     try:
         response = requests.get(url, headers=headers, params=querystring)
